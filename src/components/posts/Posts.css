@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+main {
+    font-family: "Poppins", sans-serif;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px;
+}
+
+.dropdown-label,
+.search-bar-label {
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+.dropdown-menu,
+.search-bar {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.post {
+    padding: 20px;
+    flex-basis: 20vw;
+    min-width: 150px;
+    margin: 20px;
+    border: 1px solid #b23a48;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff1eb;
+}
+
+.page-heading {
+    text-align: center;
+    font-size: 2rem;
+    margin: 10px;
+}
+
+.post-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px 0px;
+}
+
+.post-topic {
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.post-likes {
+    font-size: 1.3rem;
+    color: #b23a48;
+}
+
+.like-btn {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    padding: 5px 5px 5px 1px;
+    font-size: 1.3rem;
+    color: #b23a48;
+    font-family: "Poppins", sans-serif;
+}
