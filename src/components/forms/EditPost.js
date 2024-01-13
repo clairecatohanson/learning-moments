@@ -1,34 +1,56 @@
-import { useNavigate } from "react-router-dom"
-import { addNewPost, getAllTopics } from "../../services/postService"
 import { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import {
+    getAllTopics,
+    getPostById,
+    updatePost,
+} from "../../services/postService"
 import "./Forms.css"
 
-export const NewPost = ({ currentUser }) => {
+export const EditPost = () => {
+    const { postId } = useParams()
     const navigate = useNavigate()
 
+    const [currentPost, setCurrentPost] = useState({})
     const [allTopics, setAllTopics] = useState([])
-    const [title, setTitle] = useState("")
-    const [postBody, setPostBody] = useState("")
-    const [topicSelection, setTopicSelection] = useState(0)
 
     useEffect(() => {
-        getAllTopics().then((topicsArr) => {
-            setAllTopics(topicsArr)
+        getAllTopics().then((topicsArray) => {
+            setAllTopics(topicsArray)
         })
     }, [])
 
-    const handleSavePost = (event) => {
+    useEffect(() => {
+        getPostById(postId).then((postObj) => {
+            setCurrentPost(postObj)
+        })
+    }, [postId])
+
+    const handleInputChange = (event) => {
+        const postCopy = { ...currentPost }
+        if (event.target.name === "title" || event.target.name === "body") {
+            postCopy[event.target.name] = event.target.value
+        } else if (event.target.name === "topicId") {
+            postCopy[event.target.name] = parseInt(event.target.value)
+        }
+        setCurrentPost(postCopy)
+    }
+
+    const handleSave = (event) => {
         event.preventDefault()
 
-        const newPost = {
-            title: title,
-            body: postBody,
-            date: new Date(),
-            likes: 0,
-            userId: currentUser.id,
-            topicId: parseInt(topicSelection),
+        const updatedDate = new Date()
+        const updatedPost = {
+            id: currentPost.id,
+            title: currentPost.title,
+            body: currentPost.body,
+            date: updatedDate,
+            likes: currentPost.likes,
+            userId: currentPost.userId,
+            topicId: currentPost.topicId,
         }
-        addNewPost(newPost).then(() => {
+
+        updatePost(updatedPost).then(() => {
             navigate("/my-posts")
         })
     }
@@ -36,25 +58,20 @@ export const NewPost = ({ currentUser }) => {
     return (
         <>
             <div className="form-container">
-                <h2 className="page-heading">New Post</h2>
-                <form id="new-post-form">
+                <h2 className="page-heading">Edit Your Post</h2>
+                <form id="edit-post-form">
                     <div className="form-group">
                         <label className="form-label" htmlFor="form-title">
                             Title
                         </label>
                         <input
-                            autoComplete="off"
-                            autoFocus
-                            className="form-input"
                             id="form-title"
-                            name="new-post-title"
-                            placeholder="Enter title..."
+                            className="form-input"
+                            name="title"
                             required
                             type="text"
-                            value={title}
-                            onChange={(event) => {
-                                setTitle(event.target.value)
-                            }}
+                            value={currentPost.title ? currentPost.title : ""}
+                            onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group">
@@ -64,14 +81,11 @@ export const NewPost = ({ currentUser }) => {
                         <textarea
                             id="form-body"
                             className="form-input"
-                            name="new-post-body"
-                            placeholder="Enter post..."
+                            name="body"
                             required
                             rows="6"
-                            value={postBody}
-                            onChange={(event) => {
-                                setPostBody(event.target.value)
-                            }}
+                            value={currentPost.body ? currentPost.body : ""}
+                            onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group">
@@ -81,13 +95,13 @@ export const NewPost = ({ currentUser }) => {
                         <select
                             id="form-topic"
                             className="form-input"
+                            name="topicId"
                             required
-                            value={topicSelection}
-                            onChange={(event) => {
-                                setTopicSelection(event.target.value)
-                            }}
+                            value={
+                                currentPost.topicId ? currentPost.topicId : 0
+                            }
+                            onChange={handleInputChange}
                         >
-                            <option value="0">Select topic...</option>
                             {allTopics.map((topic) => {
                                 return (
                                     <option value={topic.id} key={topic.id}>
@@ -98,7 +112,7 @@ export const NewPost = ({ currentUser }) => {
                         </select>
                     </div>
                     <div className="form-btns">
-                        <button className="save-btn" onClick={handleSavePost}>
+                        <button className="save-btn" onClick={handleSave}>
                             Save Post
                         </button>
                     </div>

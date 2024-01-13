@@ -134,6 +134,7 @@ button {
     border-radius: 5px;
     border: solid 1px;
     font-family: "Poppins", sans-serif;
+    cursor: pointer;
 }
 
 .btns-container {

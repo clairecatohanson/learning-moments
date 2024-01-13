@@ -8,7 +8,7 @@
 }
 
 .navbar-item {
-    flex-basis: 12%;
+    flex-basis: 10%;
     padding: 15px;
     margin: 0 5px;
     text-align: center;
@@ -28,4 +28,5 @@
 .navbar-logout {
     margin-left: auto;
     margin-right: 15px;
+    flex-basis: 3%;
 }

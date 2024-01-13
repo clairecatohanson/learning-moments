@@ -1,0 +1,62 @@
+.profile-container {
+    margin: 5% auto 0 auto;
+}
+
+.user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-avatar {
+    font-family: inherit;
+    font-size: 80px;
+    font-weight: 100;
+    border: 3px solid #461220;
+    border-radius: 50%;
+    width: 150px;
+    line-height: 150px;
+    text-align: center;
+    margin: 30px;
+}
+
+.user-details {
+    margin: 30px;
+}
+
+.user-name,
+.post-count {
+    font-size: 2rem;
+    padding: 15px 0;
+}
+
+.user-cohort,
+.post-label {
+    font-size: 1.3rem;
+}
+
+.post-info {
+    width: 50%;
+    text-align: center;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff1eb;
+}
+
+.edit-btn {
+    width: 150px;
+    margin: 20px auto;
+    background-color: #461220;
+    color: #fff1eb;
+}
+
+.edit-btn:hover {
+    background-color: #8c2f39;
+}
+
+.btn-link,
+.btn-link:visited {
+    text-decoration: none;
+    color: #fff1eb;
+}

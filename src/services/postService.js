@@ -18,6 +18,13 @@ export const getPostById = async (postId) => {
     return fetchedPost
 }
 
+export const getFavoritesByUserId = async (userId) => {
+    const response = await fetch(
+        `http://localhost:8088/favorites?userId=${userId}&_expand=post`
+    )
+    return await response.json()
+}
+
 export const addToFavorites = async (newFavoriteObj) => {
     const postOptions = {
         method: "POST",

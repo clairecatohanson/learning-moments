@@ -5,6 +5,10 @@ import { NavBar } from "../components/navbar/NavBar"
 import { PostDetails } from "../components/posts/PostDetails"
 import { NewPost } from "../components/forms/NewPost"
 import { MyPosts } from "../components/posts/MyPosts"
+import { EditPost } from "../components/forms/EditPost"
+import { Favorites } from "../components/posts/Favorites"
+import { Profile } from "../components/profile/Profile"
+import { EditProfile } from "../components/forms/EditProfile"
 
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser] = useState({})
@@ -21,7 +25,7 @@ export const ApplicationViews = () => {
                 path="/"
                 element={
                     <>
-                        <NavBar />
+                        <NavBar currentUser={currentUser} />
                         <Outlet />
                     </>
                 }
@@ -32,13 +36,30 @@ export const ApplicationViews = () => {
                     element={<MyPosts currentUser={currentUser} />}
                 />
                 <Route
-                    path="posts/:postId"
-                    element={<PostDetails currentUser={currentUser} />}
+                    path="favorites"
+                    element={<Favorites currentUser={currentUser} />}
                 />
+                <Route path="posts/:postId">
+                    <Route
+                        index
+                        element={<PostDetails currentUser={currentUser} />}
+                    />
+                    <Route path="edit" element={<EditPost />} />
+                </Route>
                 <Route
                     path="new-post"
                     element={<NewPost currentUser={currentUser} />}
                 />
+                <Route path="profile">
+                    <Route
+                        path=":userId"
+                        element={<Profile currentUser={currentUser} />}
+                    />
+                    <Route
+                        path="edit"
+                        element={<EditProfile currentUser={currentUser} />}
+                    />
+                </Route>
             </Route>
         </Routes>
     )

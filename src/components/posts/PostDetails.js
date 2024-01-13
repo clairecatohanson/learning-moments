@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import {
     addToFavorites,
     getPostById,
@@ -11,6 +11,8 @@ import { Link } from "react-router-dom"
 
 export const PostDetails = ({ currentUser }) => {
     const { postId } = useParams()
+    const navigate = useNavigate()
+
     const [currentPost, setCurrentPost] = useState({})
     const [currentUserObj, setCurrentUserObj] = useState({})
     const [currentUserFavorites, setCurrentUserFavorites] = useState([])
@@ -58,6 +60,7 @@ export const PostDetails = ({ currentUser }) => {
 
         updatePost(updatedPostObj).then(() => getAndSetPost(postId))
         addToFavorites(newFavorite).then(() => getAndSetUser(currentUser))
+        navigate("/favorites")
     }
 
     const handleRemoveLike = () => {
@@ -87,12 +90,7 @@ export const PostDetails = ({ currentUser }) => {
                         className="add-like-btn btn-left"
                         onClick={handleAddLike}
                     >
-                        <Link
-                            to={`/favorites/userId-${currentUser.id}`}
-                            className="add-btn-link add-like-btn"
-                        >
-                            Add Like
-                        </Link>
+                        Add Like
                     </button>
                 )
             } else {
@@ -101,9 +99,7 @@ export const PostDetails = ({ currentUser }) => {
                         className="remove-like-btn btn-left"
                         onClick={handleRemoveLike}
                     >
-                        <Link to="" className="remove-btn-link">
-                            Remove Like
-                        </Link>
+                        Remove Like
                     </button>
                 )
             }
@@ -111,7 +107,7 @@ export const PostDetails = ({ currentUser }) => {
             return (
                 <button className="edit-post-btn btn-right">
                     <Link
-                        to={`/edit/postId-${currentPost.id}`}
+                        to={`/posts/${currentPost.id}/edit`}
                         className="edit-btn-link"
                     >
                         Edit Post
@@ -133,7 +129,7 @@ export const PostDetails = ({ currentUser }) => {
                             </div>
                             <div className="author-name">
                                 <Link
-                                    to={`/profiles/${currentPost.userId}`}
+                                    to={`/profile/${currentPost.userId}`}
                                     className="author-link"
                                 >
                                     {currentPost.user?.fullName}

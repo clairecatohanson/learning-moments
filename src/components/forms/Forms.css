@@ -1,0 +1,52 @@
+.form-container {
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #b23a48;
+    border-radius: 15px;
+    background-color: #fff1eb;
+}
+
+#new-post-form,
+#edit-post-form {
+    margin-top: 40px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.form-label {
+    margin-left: 10%;
+    margin-right: 20px;
+    flex-basis: 35%;
+    min-width: 150px;
+    text-align: right;
+    padding: 10px;
+}
+
+.form-input {
+    margin-right: 10%;
+    flex-basis: 65%;
+    min-width: 240px;
+    font-family: inherit;
+}
+
+.form-btns {
+    width: 50%;
+    margin: 50px auto 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.save-btn {
+    background-color: #b23a48;
+    color: #fff1eb;
+    border: none;
+}
+.save-btn:hover {
+    background-color: #fcb9b2;
+    color: #461220;
+}
